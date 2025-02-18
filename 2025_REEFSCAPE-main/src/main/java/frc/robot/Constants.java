@@ -81,20 +81,20 @@ public final class Constants {
       public static final double kElevatorDriveSpeed = .20;
       public static final double kElevatorMotorRotationstoMeter = 1.0 / 100.0; // dummy values
       public static final double kElevatorOffset = .25; // meters
-      public static final double kElevator_P = 1.0; // default values --> change later 
+      public static final double kElevator_P = 0.5; // default values --> change later 
       public static final double kElevator_I = 0.0; 
       public static final double kElevator_D = 0.0; 
     }
 
     public static class EndEffectorConstants
     {
-      public static final int kLeaderEffectorMotorID = 19;
-      public static final int kFollowerEffectorMotorID = 20;
-      public static final int kLeaderEffectorWristMotorID = 21;
-      public static final int kFollowerEffectorWristMotorID = 22;
+      public static final int kLeaderEffectorMotorID = 20;
+      //public static final int kFollowerEffectorMotorID = 20;
+      //public static final int kLeaderEffectorWristMotorID = 21;
+      //public static final int kFollowerEffectorWristMotorID = 22;
       public static final int kEndEffectorWristEncoder = 23;
-      public static final int kEffectorLimitPWM = 3; 
-      public static final double kEffectorMotorSpeed = .20; 
+      public static final int kEffectorLimitDI = 9; 
+      public static final double kEffectorMotorSpeed = .15; 
       public static final double kEffectorWrist_P = 1.0; // default values --> change later 
       public static final double kEffectorWrist_I = 0.0; 
       public static final double kEffectorWrist_D = 0.0; 

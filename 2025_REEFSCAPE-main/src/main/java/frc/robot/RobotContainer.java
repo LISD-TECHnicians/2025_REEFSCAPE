@@ -14,7 +14,10 @@ import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.SwerveCmd;
 import frc.robot.subsystems.DriveSubsystem.SwerveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.commands.EndEffectorCommand;
+import frc.robot.subsystems.EndEffectorSubsystem;
 import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.Constants.RobotConstants.EndEffectorConstants;
 import frc.robot.Constants.RobotConstants.SwerveDriveConstants;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -33,6 +36,9 @@ public class RobotContainer {
 
   private final ElevatorSubsystem m_ElevatorSubsystem = 
     new ElevatorSubsystem();
+
+  private final EndEffectorSubsystem m_EndEffectorSubsystem = 
+    new EndEffectorSubsystem();
 
     private final SwerveSubsystem m_SwerveSubsystem = new SwerveSubsystem();
 
@@ -58,7 +64,9 @@ private final SwerveCmd joystickSwerve = new SwerveCmd(
     m_OperatorController.cross().onTrue(new ElevatorCommand(m_ElevatorSubsystem, FieldConstants.kCoralBranchHeight_L1));
     m_OperatorController.square().onTrue(new ElevatorCommand(m_ElevatorSubsystem, FieldConstants.kCoralBranchHeight_L3));
     m_OperatorController.circle().onTrue(new ElevatorCommand(m_ElevatorSubsystem, FieldConstants.kCoralBranchHeight_L2));
-  
+    m_OperatorController.povUp().onTrue(new EndEffectorCommand(m_EndEffectorSubsystem, EndEffectorConstants.kEffectorMotorSpeed, true));
+    m_OperatorController.povDown().onTrue(new EndEffectorCommand(m_EndEffectorSubsystem, EndEffectorConstants.kEffectorMotorSpeed * -1, false));
+    m_OperatorController.L1().onTrue(new EndEffectorCommand(m_EndEffectorSubsystem, 0, false));
     //m_OperatorController.povUp().onTrue(new ArmCommand(m_ArmSubsystem, 0.20, 0.20)); // TESTING
     //m_OperatorController.povDown().onTrue(new ArmCommand(m_ArmSubsystem, -.20, -.20)); // TESTING
   }
