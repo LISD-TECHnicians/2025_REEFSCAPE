@@ -17,28 +17,23 @@ public final class Constants {
     {
       public static final int kRightShoulderMotorID = 23;
       public static final boolean kRightShoulderMotorInversion = false;
-      public static final int kLeftShoulderMotorID = 24;
-      public static final boolean kLeftShoulderMotorInversion = true;
-
-      public static final int kWristMotorID = 25; 
-      public static final boolean kWirstMotorInversion = false;
-      
+  
       public static final double kShoulderGearRatio = 1.0;
-      public static final double kWristGearRatio = 1.0;
+      //public static final double kWristGearRatio = 1.0;
 
       // test and establish these 
       public static final double kShoulderRotation_P = 1.0; 
       public static final double kShoulderRotation_I = 0.0; 
       public static final double kShoulderRotation_D = 0.0; 
 
-      public static final double kWristRotation_P = 1.0; 
+      /*public static final double kWristRotation_P = 1.0; 
       public static final double kWristRotation_I = 0.0; 
-      public static final double kWristRotation_D = 0.0; 
+      public static final double kWristRotation_D = 0.0; */
 
       public static final double kMinShoulderAngle = -0.25; 
       public static final double kMaxShoulderAngle = 0.25;
-      public static final double kMinWristAngle = 0;
-      public static final double kMaxWristAngle = 0;
+      /*public static final double kMinWristAngle = 0;
+      public static final double kMaxWristAngle = 0;*/
     }
 
     public static class CANdleConstants
@@ -89,10 +84,6 @@ public final class Constants {
     public static class EndEffectorConstants
     {
       public static final int kLeaderEffectorMotorID = 20;
-      //public static final int kFollowerEffectorMotorID = 20;
-      //public static final int kLeaderEffectorWristMotorID = 21;
-      //public static final int kFollowerEffectorWristMotorID = 22;
-      public static final int kEndEffectorWristEncoder = 23;
       public static final int kEffectorLimitDI = 9; 
       public static final double kEffectorMotorSpeed = .15; 
       public static final double kEffectorWrist_P = 1.0; // default values --> change later 

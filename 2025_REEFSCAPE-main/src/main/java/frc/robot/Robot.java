@@ -4,19 +4,38 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
+import edu.wpi.first.wpilibj.TimedRobot; //trail 
+
+import java.io.OutputStream;
+
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
+
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  private UsbCamera m_UsbCamera;
+  private CvSink m_ImageSink;
+  private CvSource m_OutputStream;
   
+
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-  }
+    //m_UsbCamera = new UsbCamera("Webcam1", 1);
+    CameraServer.startAutomaticCapture();
+    }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    /*CameraServer.startAutomaticCapture(1);
+    m_ImageSink = CameraServer.getVideo(m_UsbCamera);
+    m_OutputStream = CameraServer.putVideo("VideoStream", 640, 480)*/
+
   }
 
   @Override

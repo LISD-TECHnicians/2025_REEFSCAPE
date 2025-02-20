@@ -7,17 +7,13 @@ import java.util.function.DoubleSupplier;
 public class ArmCommand extends Command{
 
     private final ArmSubsystem m_ArmSubsystem;
-
     private final double shoulderToPosition;
-    private final double wristToPosition;
 
     public ArmCommand(ArmSubsystem subsystem, 
-                        double shoulderPosition,  
-                        double wristPosition)
+                        double shoulderPosition)
     {
         this.m_ArmSubsystem = subsystem;
         this.shoulderToPosition = shoulderPosition;
-        this.wristToPosition = wristPosition;
         addRequirements(m_ArmSubsystem);
     }
     
@@ -28,7 +24,6 @@ public class ArmCommand extends Command{
     @Override
     public void execute() {
       m_ArmSubsystem.setShoulderPosition(shoulderToPosition);
-      m_ArmSubsystem.setWristPosition(wristToPosition);
     }
   
     @Override

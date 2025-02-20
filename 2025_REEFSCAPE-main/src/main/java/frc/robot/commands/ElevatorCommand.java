@@ -7,11 +7,13 @@ public class ElevatorCommand extends Command{
     
     private final ElevatorSubsystem m_ElevatorSubsystem;
     private final double toPosition;
+    private final boolean limitData;
 
-    public ElevatorCommand(ElevatorSubsystem subsystem, double position)
+    public ElevatorCommand(ElevatorSubsystem subsystem, double position, boolean data)
     {
         this.m_ElevatorSubsystem  = subsystem;
         this.toPosition = position;
+        this.limitData = data;
         addRequirements(m_ElevatorSubsystem);
     }
     
@@ -33,6 +35,9 @@ public class ElevatorCommand extends Command{
 
   @Override
   public boolean isFinished() {
-    return false; //m_ElevatorSubsystem.getLimitState(); // can move after hitting switch??
+    if (limitData == true){
+      return !m_ElevatorSubsystem.getLimitState();
+  }
+  return false;
   }
 }

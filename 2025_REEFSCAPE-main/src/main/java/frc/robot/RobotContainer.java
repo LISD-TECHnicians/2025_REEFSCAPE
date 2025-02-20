@@ -22,23 +22,26 @@ import frc.robot.Constants.RobotConstants.SwerveDriveConstants;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class RobotContainer {
 
-  private final CommandPS4Controller m_DriverController =
-    new CommandPS4Controller(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_DriverController =
+    new CommandXboxController(OperatorConstants.kDriverControllerPort);
   
-  private final CommandPS4Controller m_OperatorController = 
-    new CommandPS4Controller(OperatorConstants.kOperatorControllerPort);
+  private final CommandXboxController m_OperatorController = 
+    new CommandXboxController(OperatorConstants.kOperatorControllerPort);
 
   private final ElevatorSubsystem m_ElevatorSubsystem = 
     new ElevatorSubsystem();
 
   private final EndEffectorSubsystem m_EndEffectorSubsystem = 
     new EndEffectorSubsystem();
+
+  private final ArmSubsystem m_ArmSubsystem = 
+    new ArmSubsystem();
 
     private final SwerveSubsystem m_SwerveSubsystem = new SwerveSubsystem();
 
@@ -47,8 +50,8 @@ private final SwerveCmd joystickSwerve = new SwerveCmd(
       () -> Math.abs(m_DriverController.getLeftX()) >= OperatorConstants.kDriverDeadbandY ? m_DriverController.getLeftX() * SwerveDriveConstants.kMaxDriveSpeed : 0.0, 
       () -> Math.abs(m_DriverController.getLeftY()) >= OperatorConstants.kDriverDeadbandX ? m_DriverController.getLeftY() * SwerveDriveConstants.kMaxDriveSpeed : 0.0,
       () -> Math.abs(m_DriverController.getRightX()) >= OperatorConstants.kDriverDeadbandTheta ? -m_DriverController.getRightX() * SwerveDriveConstants.MaxRotationSpeedCorrected : 0.0, // Switch back to commendted out 
-      m_DriverController.L1(),
-      m_DriverController.L2());
+      m_DriverController.leftBumper(),
+      m_DriverController.leftTrigger());
 
   /*private final ArmSubsystem m_ArmSubsystem = 
     new ArmSubsystem();*/
@@ -60,15 +63,15 @@ private final SwerveCmd joystickSwerve = new SwerveCmd(
   }
 
   private void configureBindings() {
-    m_OperatorController.triangle().onTrue(new ElevatorCommand(m_ElevatorSubsystem, FieldConstants.kCoralBranchHeight_L4)); // TESTING 
-    m_OperatorController.cross().onTrue(new ElevatorCommand(m_ElevatorSubsystem, FieldConstants.kCoralBranchHeight_L1));
-    m_OperatorController.square().onTrue(new ElevatorCommand(m_ElevatorSubsystem, FieldConstants.kCoralBranchHeight_L3));
-    m_OperatorController.circle().onTrue(new ElevatorCommand(m_ElevatorSubsystem, FieldConstants.kCoralBranchHeight_L2));
-    m_OperatorController.povUp().onTrue(new EndEffectorCommand(m_EndEffectorSubsystem, EndEffectorConstants.kEffectorMotorSpeed, true));
-    m_OperatorController.povDown().onTrue(new EndEffectorCommand(m_EndEffectorSubsystem, EndEffectorConstants.kEffectorMotorSpeed * -1, false));
-    m_OperatorController.L1().onTrue(new EndEffectorCommand(m_EndEffectorSubsystem, 0, false));
-    //m_OperatorController.povUp().onTrue(new ArmCommand(m_ArmSubsystem, 0.20, 0.20)); // TESTING
-    //m_OperatorController.povDown().onTrue(new ArmCommand(m_ArmSubsystem, -.20, -.20)); // TESTING
+    m_OperatorController.y().onTrue(new ElevatorCommand(m_ElevatorSubsystem, FieldConstants.kCoralBranchHeight_L4, true)); // TESTING 
+    m_OperatorController.a().onTrue(new ElevatorCommand(m_ElevatorSubsystem, FieldConstants.kCoralBranchHeight_L1, true));
+    m_OperatorController.x().onTrue(new ElevatorCommand(m_ElevatorSubsystem, FieldConstants.kCoralBranchHeight_L3, true));
+    m_OperatorController.b().onTrue(new ElevatorCommand(m_ElevatorSubsystem, FieldConstants.kCoralBranchHeight_L2, true));
+    m_DriverController.povLeft().onTrue(new EndEffectorCommand(m_EndEffectorSubsystem, EndEffectorConstants.kEffectorMotorSpeed, true));
+    m_DriverController.povRight().onTrue(new EndEffectorCommand(m_EndEffectorSubsystem, EndEffectorConstants.kEffectorMotorSpeed * -1, false));
+    m_DriverController.leftBumper().onTrue(new EndEffectorCommand(m_EndEffectorSubsystem, 0, false));
+    m_OperatorController.povUp().onTrue(new ArmCommand(m_ArmSubsystem, 0.20)); // TESTING
+    m_OperatorController.povDown().onTrue(new ArmCommand(m_ArmSubsystem, -0.20)); // TESTING
   }
 
   private void setDefaultCommand()
